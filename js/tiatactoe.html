@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .tictactoe-wrapper {
+            width: 300px;
+            height: 300px;
+        }
+        .tictactoe-wrapper button {
+            box-sizing: border-box;
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+            font-size: 50px;
+            background: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .tictactoe-wrapper .x {
+            background: #d2ffee;
+        }
+        .tictactoe-wrapper .o {
+            background: #79a1d0;
+        }
+    </style>
+    <title>틱택토</title>
+</head>
+<body>
+    <h1>TIC TAC TOE!</h1>
+    <div class="tictactoe-wrapper">
+        <button type="button" data-row="0" data-col="0"></button>
+        <button type="button" data-row="0" data-col="1"></button>
+        <button type="button" data-row="0" data-col="2"></button>
+        <button type="button" data-row="1" data-col="0"></button>
+        <button type="button" data-row="1" data-col="1"></button>
+        <button type="button" data-row="1" data-col="2"></button>
+        <button type="button" data-row="2" data-col="0"></button>
+        <button type="button" data-row="2" data-col="1"></button>
+        <button type="button" data-row="2" data-col="2"></button>
+    </div>
+    <p></p>
+    <script src="tictactoe.js"></script>
+</body>
+</html>
