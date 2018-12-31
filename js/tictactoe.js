@@ -1,5 +1,5 @@
 const tictactoeDiv = document.querySelector('.tictactoe-wrapper'),
-    cols = tictactoeDiv.querySelectorAll('button'),
+    colArr = Array.prototype.slice.call(tictactoeDiv.querySelectorAll('button')),
     resultP = document.querySelector('p'),
     tictactoeArr = [[],[],[]];
 
@@ -7,7 +7,7 @@ let turn = 'x',
     isWin = false;
 
 // 1. 3by3 준비
-cols.forEach(item => {
+colArr.forEach(item => {
     tictactoeArr[item.dataset.row][item.dataset.col] = item;
     // 2. register click event!
     item.addEventListener('click', cb);
@@ -27,7 +27,7 @@ function cb(e) {
             // 4Y: 승리 문구 출력
             resultP.textContent = `${turn}님이 승리하셨습니다.`;
             // remove click event!
-            cols.forEach(item=>item.removeEventListener('click', cb));
+            colArr.forEach(item=>item.removeEventListener('click', cb));
         } else {
             // 4N: 턴 넘김
             turn = (turn === 'x') ? 'o' : 'x';
@@ -40,35 +40,31 @@ function cb(e) {
 
 function confirmWinCondition(col) {
     let _row = col.dataset.row,
-        _col = col.dataset.col;
-
-    if ( Number(col.dataset.row) - Number(col.dataset.col) === 0 ) {
-        // \ 대각선
-        console.log(`1대각 검사`)
+        _col = col.dataset.col,
+        _arr;
+    
+    // \ 대각선
+    if ( Number(_row) - Number(_col) === 0 ) {
+        _arr = colArr.filter(item => item.dataset.row === item.dataset.col);
+        isWin = _arr.every(item => item.textContent === turn);
+        if ( isWin ) return isWin;
     }
     
-    if ( Number(col.dataset.row) + Number(col.dataset.col) === 2 ) {
-        // / 대각선
-        console.log(`2대각 검사`)
+    // / 대각선
+    if ( Number(_row) + Number(_col) === 2 ) {
+        _arr = colArr.filter(item => Number(item.dataset.row) + Number(item.dataset.col) === 2);
+        isWin = _arr.every(item => item.textContent === turn);
+        if ( isWin ) return isWin;
     }
 
     // 가로 검사
-    cols.forEach(item => {
-        if ( item.dataset.row === _row ) {
-            item.textContent === turn;
-            
-            return item.textContent === turn;
-        }    
-    });
+    isWin = tictactoeArr[_row].every(item => item.textContent === turn);
+    if ( isWin ) return isWin;
     
-    // .every(item) => {
-    //     if ( item.dataset.row === _row ) {
-    //         console.log(index, item.dataset.row, _row);
-    //         isWin = (item.textContent === turn) ? true : false;
-    //     }
-    // });
-    console.log(isWin)
     // 세로 검사
-
+    _arr = tictactoeArr.map(item => item[_col]);
+    isWin = _arr.every(item => item.textContent === turn);
+    if ( isWin ) return isWin;
+    
     return isWin;
 }
