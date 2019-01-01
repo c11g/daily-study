@@ -36,7 +36,6 @@ function cb(e) {
         resultDiv.textContent = '축하합니다. 당신이 승리했습니다!'
         userWinCount++;
         userWinStrong.textContent = userWinCount;
-
     } else if ( winner === computerHands ) {
         resultDiv.textContent = '아쉽네요. 당신이 지셨습니다.'
         computerWinCount++;
@@ -56,7 +55,7 @@ function getWinner(userHands, computerHands) {
     } else {
         return Math.max(userHands, computerHands);
     }
-}
+} 
 
 // 1. 이미지를 돌린다.
 rotatingImg();

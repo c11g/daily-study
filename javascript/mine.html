@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .col-count, .row-count, .mine-count {
+            width: 50px;
+        }
+        .mine-wrap {
+            margin-top: 20px;
+        }
+        .mine-wrap button {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            vertical-align: top;
+        }
+        .mine-wrap button[data-status]:after {
+            display: inline;
+            content: attr(data-status);
+        }
+    </style>
+    <title>지뢰 찾기</title>
+</head>
+<body>
+    <h1>지뢰 찾기</h1>
+    <input type="number" class="col-count" value="10" placeholder="가로 칸">
+    <input type="number" class="row-count" value="10" placeholder="세로 칸">
+    <input type="number" class="mine-count" value="20" placeholder="지뢰 갯수">
+    <button type="button" class="button-execute">시작</button>
+    <div class="mine-wrap">
+        <!-- button.mine-col * n -->
+    </div>
+    <script src="mine.js"></script>
+</body>
+</html>
