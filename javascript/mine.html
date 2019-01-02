@@ -17,9 +17,9 @@
             height: 25px;
             vertical-align: top;
         }
-        .mine-wrap button[data-status]:after {
+        .mine-wrap.is-over button[data-mine]:after {
             display: inline;
-            content: attr(data-status);
+            content: attr(data-mine);
         }
     </style>
     <title>지뢰 찾기</title>
@@ -33,6 +33,7 @@
     <div class="mine-wrap">
         <!-- button.mine-col * n -->
     </div>
+    <p class="result"></p>
     <script src="mine.js"></script>
 </body>
 </html>

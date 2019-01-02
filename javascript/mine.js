@@ -1,13 +1,18 @@
 const wrapDiv = document.querySelector('.mine-wrap'),
-    executeButton = document.querySelector('.button-execute');
+    executeButton = document.querySelector('.button-execute'),
+    resultP = document.querySelector('.result');
 
-let dataArr = [];
+let mine = 'X',
+    columnArr = [];
 
 // 1. 판 그리기
 function makeMap(){
-    // 태그 및 배열 데이터 초기화
+    // 뷰, 모델 초기화
+    wrapDiv.classList.remove('is-over');
     wrapDiv.innerHTML = '';
-    dataArr = [];
+    resultP.textContent = '';
+    columnArr = [];
+    
     let colCount = parseInt(document.querySelector('.col-count').value),
         rowCount = parseInt(document.querySelector('.row-count').value),
         mineCount = parseInt(document.querySelector('.mine-count').value);
@@ -15,12 +20,12 @@ function makeMap(){
     wrapDiv.style.width = `${25*colCount}px`;
 
     for (let _row=0; _row<rowCount; _row++) {
-        dataArr[_row] = [];
+        columnArr[_row] = [];
         for(let _col=0; _col<colCount; _col++){
             let button = document.createElement('button');
             button.dataset.row = _row;
             button.dataset.col = _col;
-            dataArr[_row][_col] = button;
+            columnArr[_row][_col] = button;
             wrapDiv.appendChild(button);
         }
     }
@@ -30,8 +35,7 @@ function makeMap(){
     shuffle.forEach((item) => {
         let _row = Math.floor(item/colCount),
             _col = item%colCount;
-            console.log(item,_row,_col);
-        dataArr[_row][_col].dataset.status = 'X';
+        columnArr[_row][_col].dataset.mine = mine;
     });
 }
 
@@ -55,9 +59,49 @@ executeButton.addEventListener('click', makeMap);
 // 우클릭 이벤트
 wrapDiv.addEventListener('contextmenu', (e)=>{
     e.preventDefault();
-    let _button = e.target,
-        _buttonRow = e.target.dataset.row,
-        _buttonCol = e.target.dataset.col;
+    let _row = parseInt(e.target.dataset.row),
+        _col = parseInt(e.target.dataset.col),
+        _column = columnArr[_row][_col];
     
-    dataArr[_buttonRow][_buttonCol].dataset.status = '!';
-})
+    if ( _column.textContent === '' ) {
+        _column.textContent = '!';
+    } else if ( _column.textContent === '!' ) {
+        _column.textContent = '?';
+    } else {
+        _column.textContent = '';
+    }
+});
+
+// 좌클릭 이벤트
+wrapDiv.addEventListener('click', (e)=>{
+    let _row = parseInt(e.target.dataset.row),
+        _col = parseInt(e.target.dataset.col),
+        _column = columnArr[_row][_col];
+    
+    if ( _column.dataset.mine === mine ) {
+        // 지뢰면 게임 종료
+        resultP.textContent = '펑!! 게임 종료';
+        wrapDiv.classList.add('is-over');
+    } else {
+        // 지뢰가 아니면 이웃칸 확인
+        let _neighborColumnArr = [];
+        // 윗 줄 3칸
+        if ( columnArr[_row-1] ) {
+            _neighborColumnArr.push(columnArr[_row-1][_col-1]);
+            _neighborColumnArr.push(columnArr[_row-1][_col]);
+            _neighborColumnArr.push(columnArr[_row-1][_col+1]);
+        }
+        // 같은 줄 2칸
+        _neighborColumnArr.push(columnArr[_row][_col-1]);
+        _neighborColumnArr.push(columnArr[_row][_col+1]);
+        // 아랫 줄 3칸
+        if ( columnArr[_row+1] ) {
+            _neighborColumnArr.push(columnArr[_row+1][_col-1]);
+            _neighborColumnArr.push(columnArr[_row+1][_col]);
+            _neighborColumnArr.push(columnArr[_row+1][_col+1]);
+        }
+
+        _neighborColumnArr = _neighborColumnArr.filter(item => item).filter(item => item.dataset.mine === mine);
+        _column.textContent = _neighborColumnArr.length;
+    }
+});
