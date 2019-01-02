@@ -105,3 +105,9 @@ wrapDiv.addEventListener('click', (e)=>{
         _column.textContent = _neighborColumnArr.length;
     }
 });
+
+// TODO
+// 1. 타이머
+// 2. !, ? 의 스타일
+// 3. 게임 종료 시 클릭 이벤트 제거
+// 4. 사운드 삽입(BG, 클릭, 펑)
