@@ -1,10 +1,12 @@
-def greeting(input):
-    try:
-        name = str(input)
-    except:
-        name = -1
-        print("Error")
-    
-    return "Hello" + name
+fhand = open("./python/string.py")
 
-print(greeting(15))
+result = ""
+count = 0
+for line in fhand:
+    result = result + line
+    count = count + 1
+print(fhand.read())
+
+print("1", result)
+text = fhand.read()
+print("character:",len(text))
