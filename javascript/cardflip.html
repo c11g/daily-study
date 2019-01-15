@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .card-wrapper {
+            padding: 0;
+            font-size: 0;
+        }
+        .card-list {
+            display: inline-block;
+            margin: 5px 10px;
+            width: 150px;
+            height: 200px;
+            perspective: 1000px;
+            background: transparent;
+        }
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card-front {
+            z-index: 1;
+            transform: rotateY(180deg);
+        }
+        .card-back {
+            z-index: 2;
+            background: #3a2a90;
+        }
+        .card-list:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+    </style>
+    <title>카드 뒤집기</title>
+</head>
+<body>
+    <ul class="card-wrapper">
+        <li class="card-list">
+            <div class="card-inner">
+                <button type="button" class="card card-back"></button>
+                <button type="button" class="card card-front"></button>
+            </div>
+        </li>
+    </ul>
+    <br>
+    <button type="button" class="button-new">New Game</button>
+    <time class="time"></time>
+    <p class="text">가이드 텍스트</p>
+<script src="cardflip.js"></script>
+</body>
+</html>
