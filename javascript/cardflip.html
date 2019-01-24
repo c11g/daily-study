@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
+        .button-card-number {
+            width: 50px;
+        }
+        .button-new {
+            margin-left: 20px;
+        }
         .card-wrapper {
             padding: 0;
             font-size: 0;
@@ -49,18 +55,13 @@
     <title>카드 뒤집기</title>
 </head>
 <body>
-    <ul class="card-wrapper">
-        <li class="card-list">
-            <div class="card-inner">
-                <button type="button" class="card card-back"></button>
-                <button type="button" class="card card-front"></button>
-            </div>
-        </li>
-    </ul>
-    <br>
+    카드 갯수: <input type="text" class="button-card-number" value="8">개
     <button type="button" class="button-new">New Game</button>
     <time class="time"></time>
     <p class="text">가이드 텍스트</p>
+    <ul class="card-wrapper">
+    </ul>
+    <br>
 <script src="cardflip.js"></script>
 </body>
 </html>
