@@ -19,8 +19,3 @@ class Student(Person):
 me = Person('c11g')
 y = Student('yunseo')
 y.setSchool('MIT')
-print(y.level)
-y.lvup()
-y.lvup()
-y.lvup()
-print(y.level)
