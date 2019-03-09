@@ -11,7 +11,7 @@ def insertion_sort(a):
 
         while a[before_index] > key: # key가 자기보다 좌측에 위치한 원소의 숫자보다 더 작으면
             
-            a[before_index+1] = a[before_index] # key가 들어갈 자리 확보를 위해 원소들을 모두 한 칸씩 우측으로 옮김
+            a[before_index+1] = a[before_index] # key가 들어갈 자리 확보를 위해 원소를 key 자리에 옮김
             
             before_index = before_index-1 # 0번째 원소에 도달하면 종료하기 위한 조건
             if (before_index < 0):
