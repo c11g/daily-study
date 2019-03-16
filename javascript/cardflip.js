@@ -1,4 +1,3 @@
-
 const cardWrapperUl = document.querySelector('.card-wrapper'),
     newGameButton = document.querySelector('.button-new');
 
@@ -7,7 +6,7 @@ let cardNumber = parseInt(document.querySelector('.button-card-number').value),
 
 // li.card-list 만들기 ( view )
 function makeCardView() {
-    let li = document.createElement('li'),
+    const li = document.createElement('li'),
         cardButton = document.createElement('button'),
         inner = document.createElement('div'),
         cardBack = document.createElement('div'),
