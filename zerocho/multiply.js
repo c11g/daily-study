@@ -5,7 +5,9 @@ const questionDiv = document.querySelector('.question'),
     startButton = document.querySelector('.start-button'),
     enterButton = document.querySelector('.enter-button'),
     historyOl = document.querySelector('.history-list'),
-    scoreDiv = document.querySelector('.score');
+    scoreDiv = document.querySelector('.score'),
+    bgmButton = document.querySelector('.bgm-button'),
+    audioEl = document.querySelector('audio');
 
 function random() {
     return Math.ceil(Math.random()*7 + 2);
@@ -57,4 +59,12 @@ startButton.addEventListener('click', () => {
 
     input.value = '';
     input.focus();
-})
+});
+
+bgmButton.addEventListener('click', () => {
+    if ( audioEl.paused ) {
+        audioEl.play();
+    } else {
+        audioEl.pause();
+    }
+});
