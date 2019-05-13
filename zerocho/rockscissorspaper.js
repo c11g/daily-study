@@ -5,9 +5,9 @@ const img = document.querySelector('.img'),
     userWinStrong = document.querySelector('.userWin'),
     computerWinStrong = document.querySelector('.computerWin'),
     drawStrong = document.querySelector('.draw'),
-    classArr = ['sizzer', 'rock', 'paper'],
+    classArr = ['scissors', 'rock', 'paper'],
     computerHandsMap = {
-        'sizzer': -1,
+        'scissors': -1,
         'rock': 0,
         'paper': 1,
     };
