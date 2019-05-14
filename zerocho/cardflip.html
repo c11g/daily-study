@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-        .button-card-number {
+        .button-card-count {
             width: 50px;
         }
         .button-new {
@@ -22,7 +22,7 @@
         .card-button {
             display: block;
             width: 150px;
-            height: 200px;
+            height: 230px;
             padding: 0;
             border: 0;
             perspective: 1000px;
@@ -37,13 +37,14 @@
             height: 100%;
         }
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            backface-visibility: hidden;
             position: absolute;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
+            border-radius: 10px 10px 14px 14px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            background-size: cover;
+            background-position: center;
         }
         .card-front {
             z-index: 1;
@@ -51,16 +52,55 @@
         }
         .card-back {
             z-index: 2;
-            background: #3a2a90;
+            background-image: url('./images/green_back.png');
         }
         .card-button.is-fliped .card-inner {
             transform: rotateY(180deg);
+        }
+        .card-number-ac {
+            background-image: url('./images/AC.png');
+        }
+        .card-number-2c {
+            background-image: url('./images/2C.png');
+        }
+        .card-number-3c {
+            background-image: url('./images/3C.png');
+        }
+        .card-number-4c {
+            background-image: url('./images/4C.png');
+        }
+        .card-number-5c {
+            background-image: url('./images/5C.png');
+        }
+        .card-number-6c {
+            background-image: url('./images/6C.png');
+        }
+        .card-number-7c {
+            background-image: url('./images/7C.png');
+        }
+        .card-number-8c {
+            background-image: url('./images/8C.png');
+        }
+        .card-number-9c {
+            background-image: url('./images/9C.png');
+        }
+        .card-number-10c {
+            background-image: url('./images/10C.png');
+        }
+        .card-number-jc {
+            background-image: url('./images/JC.png');
+        }
+        .card-number-qc {
+            background-image: url('./images/QC.png');
+        }
+        .card-number-kc {
+            background-image: url('./images/KC.png');
         }
     </style>
     <title>카드 뒤집기</title>
 </head>
 <body>
-    카드 갯수: <input type="text" class="button-card-number" value="4">개
+    카드 갯수 : <input type="text" class="button-card-count" value="4"> 쌍
     <button type="button" class="button-new">New Game</button>
     <time class="time"></time>
     <p class="text">가이드 텍스트</p>
