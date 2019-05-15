@@ -1,16 +1,27 @@
 const cardWrapperUl = document.querySelector(".card-wrapper"),
-    newGameButton = document.querySelector(".button-new");
+    startGameButton = document.querySelector(".button-start"),
+    pairInput = document.querySelector(".button-card-count"),
+    textP = document.querySelector('.text');
 
-let cardPair, cardModelArr, cardNumberArr;
+let cardPair, cardModelArr, cardNumberArr, isReady = false;
 
+// 게임 초기화
 function init() {
-    cardPair = parseInt(document.querySelector(".button-card-count").value);
+    cardPair = parseInt(pairInput.value);
+    if (cardPair < 2) {
+        cardPair = 2;
+        pairInput.value = 2;
+    } else if (cardPair > 13) {
+        cardPair = 13;
+        pairInput.value = 13;
+    }
     cardModelArr = [];
     cardNumberArr = ["ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "10c", "jc", "qc", "kc"];
+    cardWrapperUl.innerHTML = "";
 }
 
-// 게임 준비: view
-function renderCard() {
+// 카드 element
+function makeCardElement() {
     const li = document.createElement("li"),
         cardButton = document.createElement("button"),
         inner = document.createElement("div"),
@@ -53,13 +64,9 @@ function shuffleCardArr(count, arr) {
     return shuffleArr;
 }
 
-// 새 게임 시작 이벤트
-newGameButton.addEventListener("click", () => {
-    init();
-    cardWrapperUl.innerHTML = "";
-
+function renderView() {
     for (let i = 0; i < cardPair * 2; i++) {
-        let { cardLi, cardButton } = renderCard();
+        let { cardLi, cardButton } = makeCardElement();
         cardWrapperUl.append(cardLi);
 
         // cardModelArr 준비
@@ -72,6 +79,16 @@ newGameButton.addEventListener("click", () => {
     cardModelArr.forEach((item, i) => {
         item.querySelector('.card-front').classList.add(`card-number-${shuffleArr[i]}`);
     });
+}
+
+// 게임 준비 & 시작 이벤트
+startGameButton.addEventListener('click', (e) => {
+    if (!isReady) {
+        init();
+        renderView();
+    } else {
+
+    }
 });
 
 // cardClickHandler
@@ -91,7 +108,7 @@ function cardClickHandler(e) {
 [v] 4. 카드모델(cardModelArr)에 클래스 입히기
 
 ---
-1. 카드 갯수 2~13 사이만 입력 받기
-2. 처음 몇 초 동안 앞면 보여주기
-    2.1 카드 갯수에 따라 달리 설정
+[v] 1. 카드 갯수 2~13 사이만 입력 받기
+[ ] 2. 처음 몇 초 동안 앞면 보여주기
+    [ ] 2.1 카드 갯수에 따라 달리 설정
 */
