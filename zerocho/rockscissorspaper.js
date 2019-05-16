@@ -6,7 +6,7 @@ const img = document.querySelector('.img'),
     computerWinStrong = document.querySelector('.computerWin'),
     drawStrong = document.querySelector('.draw'),
     classArr = ['scissors', 'rock', 'paper'],
-    computerHandsMap = {
+    handsMap = {
         'scissors': -1,
         'rock': 0,
         'paper': 1,
@@ -28,10 +28,12 @@ function rotatingImg() {
 }
 
 function cb(e) {
-    let userHands = Number(e.target.dataset.hands),
-        computerHands = computerHandsMap[img.className.split(' ')[1]];
+    let userHands = handsMap[e.target.dataset.hands],
+        computerHands = handsMap[img.className.split(' ')[1]];
+    
     clearInterval(time);
     let winner = getWinner(userHands, computerHands);
+    
     if ( winner === userHands ) {
         resultDiv.textContent = '축하합니다. 당신이 승리했습니다!'
         userWinCount++;
