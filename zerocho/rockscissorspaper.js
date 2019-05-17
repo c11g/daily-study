@@ -12,14 +12,14 @@ const img = document.querySelector('.img'),
         'paper': 1,
     };
 
-let time,
+let timerId,
     userWinCount = 0,
     computerWinCount = 0,
     drawCount = 0;
 
 function rotatingImg() {
     let i = 0;
-    time = setInterval(() => {
+    timerId = setInterval(() => {
         img.className = `img ${classArr[i]}`;
         i++;
         if (i === classArr.length ) i = 0;
@@ -27,11 +27,11 @@ function rotatingImg() {
     resultDiv.textContent = '';
 }
 
-function cb(e) {
+function shoot(e) {
     let userHands = handsMap[e.target.dataset.hands],
         computerHands = handsMap[img.className.split(' ')[1]];
     
-    clearInterval(time);
+    clearInterval(timerId);
     let winner = getWinner(userHands, computerHands);
     
     if ( winner === userHands ) {
@@ -43,7 +43,6 @@ function cb(e) {
         computerWinCount++;
         computerWinStrong.textContent = computerWinCount;
     }
-
 }
 
 function getWinner(userHands, computerHands) {
@@ -63,5 +62,5 @@ function getWinner(userHands, computerHands) {
 rotatingImg();
 
 // 2. 이미지를 멈춘다.
-buttons.forEach(item => item.addEventListener('click', cb));
+buttons.forEach(item => item.addEventListener('click', shoot));
 reload.addEventListener('click', rotatingImg);
