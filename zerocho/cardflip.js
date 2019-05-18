@@ -1,9 +1,10 @@
 const cardWrapperUl = document.querySelector(".card-wrapper"),
+    readyGameButton = document.querySelector(".button-ready"),
     startGameButton = document.querySelector(".button-start"),
     pairInput = document.querySelector(".button-card-count"),
     textP = document.querySelector('.text');
 
-let cardPair, cardModelArr, cardNumberArr, isReady = false;
+let cardPair, cardModelArr, cardNumberArr;
 
 // 게임 초기화
 function init() {
@@ -82,13 +83,9 @@ function renderView() {
 }
 
 // 게임 준비 & 시작 이벤트
-startGameButton.addEventListener('click', (e) => {
-    if (!isReady) {
-        init();
-        renderView();
-    } else {
-
-    }
+readyGameButton.addEventListener('click', (e) => {
+    init();
+    renderView();
 });
 
 // cardClickHandler
