@@ -53,7 +53,6 @@ function shuffleCardArr(count, arr) {
         );
         i++;
     }
-
     pickArr = pickArr.concat(pickArr);
 
     while (pickArr.length > 0) {

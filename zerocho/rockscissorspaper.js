@@ -33,7 +33,7 @@ function shoot(e) {
 	
 	let userHands = handsMap[e.target.dataset.hands],
 		computerHands = handsMap[img.className.split(' ')[1]],
-		winner = getWinner(userHands, computerHands);
+        winner = getWinner(userHands, computerHands);
     
     if ( winner === userHands ) {
         resultDiv.textContent = '축하합니다. 당신이 승리했습니다!'
