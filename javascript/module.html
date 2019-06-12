@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Module</title>
+</head>
+<body>
+	<!-- <script type="module" src="module1.js"></script>
+	<script type="module" src="module2.js"></script> -->
+	<script type="module">
+		import x from './module1.js';
+		import y from './module2.js';
+		console.log('script in html: ', x, y);
+	</script>
+</body>
+</html>

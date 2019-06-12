@@ -18,6 +18,7 @@ let timerId,
     drawCount = 0;
 
 function rotatingImg() {
+	clearInterval(timerId);
     let i = 0;
     timerId = setInterval(() => {
         img.className = `img ${classArr[i]}`;
@@ -32,24 +33,22 @@ function shoot(e) {
 	
 	let userHands = handsMap[e.target.dataset.hands],
 		computerHands = handsMap[img.className.split(' ')[1]],
-		winner = getWinner(userHands, computerHands);
+        winner = getWinner(userHands, computerHands);
     
     if ( winner === userHands ) {
         resultDiv.textContent = '축하합니다. 당신이 승리했습니다!'
-        userWinCount++;
-        userWinStrong.textContent = userWinCount;
+        userWinStrong.textContent = ++userWinCount;
     } else if ( winner === computerHands ) {
         resultDiv.textContent = '아쉽네요. 당신이 지셨습니다.'
-        computerWinCount++;
-        computerWinStrong.textContent = computerWinCount;
-    }
+        computerWinStrong.textContent = ++computerWinCount;
+    } else if ( winner === 'draw') {
+		resultDiv.textContent = '비겼습니다.';
+		drawStrong.textContent = ++drawCount;
+	}
 }
 
 function getWinner(userHands, computerHands) {
     if ( userHands === computerHands) {
-        resultDiv.textContent = '비겼습니다.';
-        drawCount++;
-        drawStrong.textContent = drawCount;
         return 'draw';
     } else if (Math.abs(userHands) === Math.abs(computerHands)) {
         return Math.min(userHands, computerHands);

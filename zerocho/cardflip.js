@@ -53,7 +53,6 @@ function shuffleCardArr(count, arr) {
         );
         i++;
     }
-
     pickArr = pickArr.concat(pickArr);
 
     while (pickArr.length > 0) {
@@ -65,7 +64,7 @@ function shuffleCardArr(count, arr) {
     return shuffleArr;
 }
 
-function renderView() {
+function renderCards() {
     for (let i = 0; i < cardPair * 2; i++) {
         let { cardLi, cardButton } = makeCardElement();
         cardWrapperUl.append(cardLi);
@@ -85,7 +84,7 @@ function renderView() {
 // 게임 준비 & 시작 이벤트
 readyGameButton.addEventListener('click', (e) => {
     init();
-    renderView();
+    renderCards();
 });
 
 // cardClickHandler

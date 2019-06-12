@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<div id="content">
+
+	</div>
+	
+<script>
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'data.json');
+xhr.send();
+
+xhr.onreadystatechange = function () {
+	if ( xhr.readyState === XMLHttpRequest.DONE ) {
+		console.log(`[STATUS] ${xhr.status}: ${xhr.statusText}`);
+		if ( xhr.status === 200 ) {
+			let responseObject = JSON.parse(xhr.responseText);
+
+			// JSON → HTML String
+			var newContent = '';
+			newContent += '<div id="tours">';
+			newContent += '<h1>Guided Tours</h1>';
+			newContent += '<ul>';
+
+			responseObject.tours.forEach(function (tour) {
+				newContent += '<li class="' + tour.region + ' tour">';
+				newContent += '<h2>' + tour.location + '</h2>';
+				newContent += '<span class="details">' + tour.details + '</span>';
+				newContent += '<button class="book">Book Now</button>';
+				newContent += '</li>';
+			});
+
+			newContent += '</ul></div>';
+
+			document.getElementById('content').innerHTML = newContent;
+		}
+	}
+};
+</script>
+</body>
+</html>
