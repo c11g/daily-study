@@ -4,7 +4,8 @@ const cardWrapperUl = document.querySelector(".card-wrapper"),
     pairInput = document.querySelector(".button-card-count"),
     textP = document.querySelector('.text');
 
-let cardPair, cardModelArr, cardNumberArr;
+let cardPair, cardModelArr, cardNumberArr,
+    showTime = 2000;
 
 // 게임 초기화
 function init() {
@@ -22,7 +23,7 @@ function init() {
 }
 
 // 카드 element
-function makeCardElement() {
+function makeCard() {
     const li = document.createElement("li"),
         cardButton = document.createElement("button"),
         inner = document.createElement("div"),
@@ -66,12 +67,11 @@ function shuffleCardArr(count, arr) {
 
 function renderCards() {
     for (let i = 0; i < cardPair * 2; i++) {
-        let { cardLi, cardButton } = makeCardElement();
+        let { cardLi, cardButton } = makeCard();
         cardWrapperUl.append(cardLi);
 
         // cardModelArr 준비
         cardModelArr.push(cardButton);
-        cardButton.addEventListener("click", cardClickHandler);
     }
 
     // apply card number classes
@@ -81,10 +81,20 @@ function renderCards() {
     });
 }
 
-// 게임 준비 & 시작 이벤트
-readyGameButton.addEventListener('click', (e) => {
+// 게임 준비
+readyGameButton.addEventListener('click', () => {
     init();
     renderCards();
+});
+
+// 게임 시작
+startGameButton.addEventListener('click', () => {
+    if (!cardModelArr) return;
+    cardWrapperUl.classList.add('is-show-all');
+    setTimeout(function () {
+        cardWrapperUl.classList.remove('is-show-all');
+    }, showTime);
+    cardModelArr.forEach(card => card.addEventListener("click", cardClickHandler));
 });
 
 // cardClickHandler
@@ -105,6 +115,5 @@ function cardClickHandler(e) {
 
 ---
 [v] 1. 카드 갯수 2~13 사이만 입력 받기
-[ ] 2. 처음 몇 초 동안 앞면 보여주기
-    [ ] 2.1 카드 갯수에 따라 달리 설정
+[v] 2. 처음 몇 초 동안 앞면 보여주기
 */
