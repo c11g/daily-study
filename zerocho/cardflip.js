@@ -5,6 +5,7 @@ const cardWrapperUl = document.querySelector(".card-wrapper"),
     textP = document.querySelector('.text');
 
 let cardPair, cardModelArr, cardNumberArr,
+    onePair = [],
     showTime = 2000;
 
 // 게임 초기화
@@ -77,6 +78,7 @@ function renderCards() {
     // apply card number classes
     const shuffleArr = shuffleCardArr(cardPair, cardNumberArr);
     cardModelArr.forEach((item, i) => {
+        item.cardValue = shuffleArr[i];
         item.querySelector('.card-front').classList.add(`card-number-${shuffleArr[i]}`);
     });
 }
@@ -99,8 +101,14 @@ startGameButton.addEventListener('click', () => {
 
 // cardClickHandler
 function cardClickHandler(e) {
-    let thisCard = e.currentTarget;
-    thisCard.classList.toggle("is-fliped");
+    let currentCard = e.currentTarget;
+    currentCard.classList.toggle("is-fliped");
+
+    if ( onePair.length === 2 ) {
+        onePair = [];
+    }
+    
+    onePair.push(currentCard.cardValue);
 }
 
 /* TODO - 카드
@@ -115,7 +123,7 @@ function cardClickHandler(e) {
 [v] 5. 카드 갯수 2~13 사이만 입력 받기
 [v] 6. 처음 몇 초 동안 앞면 보여주기
 --
-[ ] 7. 연속해서 2개의 클릭한 카드 정보를 저장
+[v] 7. 연속해서 2개의 클릭한 카드 정보를 저장
     [ ] 7.1 2개의 카드가 같으면 계속 오픈된 상태 유지
     [ ] 7.2 2개의 카드가 다르면 다시 뒤집음
 [ ] 8. 모든 카드가 다 오픈되면 게임 종료
