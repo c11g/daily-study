@@ -93,8 +93,8 @@ startGameButton.addEventListener('click', () => {
     cardWrapperUl.classList.add('is-show-all');
     setTimeout(function () {
         cardWrapperUl.classList.remove('is-show-all');
+        cardModelArr.forEach(card => card.addEventListener("click", cardClickHandler));
     }, showTime);
-    cardModelArr.forEach(card => card.addEventListener("click", cardClickHandler));
 });
 
 // cardClickHandler
