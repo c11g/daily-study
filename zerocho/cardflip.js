@@ -103,12 +103,17 @@ startGameButton.addEventListener('click', () => {
 function cardClickHandler(e) {
     let currentCard = e.currentTarget;
     currentCard.classList.toggle("is-fliped");
-
+    
+    onePair.push(currentCard.cardValue);
+    
     if ( onePair.length === 2 ) {
+        if ( onePair[0] === onePair[1] ) {
+            
+        }
+        
         onePair = [];
     }
     
-    onePair.push(currentCard.cardValue);
 }
 
 /* TODO - 카드
