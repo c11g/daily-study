@@ -102,18 +102,24 @@ startGameButton.addEventListener('click', () => {
 // cardClickHandler
 function cardClickHandler(e) {
     let currentCard = e.currentTarget;
-    currentCard.classList.toggle("is-fliped");
+
+    if ( currentCard.classList.contains('is-fliped') ) return;
+    currentCard.classList.add("is-fliped");
     
-    onePair.push(currentCard.cardValue);
+    onePair.push(currentCard);
     
     if ( onePair.length === 2 ) {
-        if ( onePair[0] === onePair[1] ) {
-            
+        if ( onePair[0].cardValue === onePair[1].cardValue ) {
+            onePair = [];
+            return;
         }
         
-        onePair = [];
+        
+        setTimeout(()=>{
+            onePair.forEach(card => card.classList.remove('is-fliped'));
+            onePair = [];
+        }, 1000);
     }
-    
 }
 
 /* TODO - 카드
@@ -129,7 +135,7 @@ function cardClickHandler(e) {
 [v] 6. 처음 몇 초 동안 앞면 보여주기
 --
 [v] 7. 연속해서 2개의 클릭한 카드 정보를 저장
-    [ ] 7.1 2개의 카드가 같으면 계속 오픈된 상태 유지
-    [ ] 7.2 2개의 카드가 다르면 다시 뒤집음
+    [v] 7.1 2개의 카드가 같으면 계속 오픈된 상태 유지
+    [v] 7.2 2개의 카드가 다르면 다시 뒤집음
 [ ] 8. 모든 카드가 다 오픈되면 게임 종료
 */
