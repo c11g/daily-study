@@ -6,6 +6,7 @@ const cardWrapperUl = document.querySelector(".card-wrapper"),
 
 let cardPair, cardModelArr, cardNumberArr,
     onePair = [],
+    flipedCards = [],
     showTime = 2000;
 
 // 게임 초기화
@@ -19,6 +20,7 @@ function init() {
         pairInput.value = 13;
     }
     cardModelArr = [];
+    flipedCards = [];
     cardNumberArr = ["ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "10c", "jc", "qc", "kc"];
     cardWrapperUl.innerHTML = "";
 }
@@ -110,10 +112,15 @@ function cardClickHandler(e) {
     
     if ( onePair.length === 2 ) {
         if ( onePair[0].cardValue === onePair[1].cardValue ) {
+            flipedCards.push(...onePair);
+
+            if (flipedCards.length === cardModelArr.length) {
+                alert('Success!');
+                return;
+            }
             onePair = [];
             return;
         }
-        
         
         setTimeout(()=>{
             onePair.forEach(card => card.classList.remove('is-fliped'));
@@ -137,5 +144,8 @@ function cardClickHandler(e) {
 [v] 7. 연속해서 2개의 클릭한 카드 정보를 저장
     [v] 7.1 2개의 카드가 같으면 계속 오픈된 상태 유지
     [v] 7.2 2개의 카드가 다르면 다시 뒤집음
-[ ] 8. 모든 카드가 다 오픈되면 게임 종료
+[v] 8. 모든 카드가 다 오픈되면 게임 종료
+-- 개선사항 --
+[ ] 1. 카드 뒤집어지기 전에 게임 종료 얼럿 뜸
+[ ] 2. 카드 뒤집히는 동안 다시 카드 클릭못하게..
 */
