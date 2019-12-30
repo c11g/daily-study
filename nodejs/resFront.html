@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>RESTful Server</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+  <hr>
+  <form id="form">
+    <input type="text" name="username" placeholder="이름을 입력하세요">
+    <button type="submit">등록</button>
+  </form>
+  <hr>
+  <div id="list"></div>
+<script>
+const getUser = _ => {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = _ => {
+    if (xhr.status === 200) {
+      const users = JSON.parse(xhr.responseText);
+      const list = document.querySelector('#list');
+      list.innerHTML = '';
+      Object.keys(users).map(key => {
+        const userDiv = document.createElement('div');
+        const span = document.createElement('span');
+        span.textContent = users[key];
+        
+        const edit = docuemnt.createElement('button');
+        edit.textContent = '수정';
+        edit.addEventListener('click', _ => {
+          const name = prompt('바꿀 이름을 입력하세요');
+          if (!name) alert('이름을 입력하세요!');
+
+          const xhr = new XMLHttpRequest();
+          xhr.onload = _ => {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+              getUser();
+            } else {
+              console.error(xhr.responseText);
+            }
+          };
+          xhr.open('PUT', `/users/${key}`);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.send(JSON.stringify({name: name}));
+        });
+        
+        const remove = document.createElement('button');
+        remove.textContent = '삭제';
+        remove.addEventListener('click', _ => {
+          const xhr = new XMLHttpRequest();
+          xhr.onload = _ => {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+              getUser();
+            } else {
+              console.error(xhr.responseText);
+            }
+          };
+          xhr.open('DELETE', `/users/${key}`);
+          xhr.send();
+        });
+
+        userDiv.appendChild(span);
+        userDiv.appendChild(edit);
+        userDiv.appendChild(remove);
+        list.appendChild(userDiv);
+      });
+    } else {
+      console.error(xhr.responseText);
+    }
+  };
+  xhr.open('GET', '/users');
+  xhr.send();
+};
+
+window.onload = getUser;
+
+const form = document.querySelector('#form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = e.target.username.value;
+  if (!name) alert('이름을 입력하세요');
+  
+  const xhr = new XMLHttpRequest();
+  console.log('fire')
+  xhr.onload = _ => {
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+      getUser();
+    } else {
+      console.error(xhr.responseText);
+    }
+    xhr.open('POST', '/users');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({name: name}));
+    e.target.name.value = '';
+  };
+});
+
+</script>
+</body>
+</html>
