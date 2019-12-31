@@ -20,8 +20,8 @@ http.createServer((req, res) => {
     }
   } else if (req.method === 'POST') {
     if (req.url === '/users') {
-      console.log('POST body:', body);
       let body = '';
+      console.log('POST body:', body);
       req.on('data', data => {
         body += data;
       });
@@ -36,9 +36,24 @@ http.createServer((req, res) => {
       });
     }
   } else if (req.method === 'PUT') {
-
+    if (req.url.startsWith('/users/')) {
+      const key = req.url.split('/')[2];
+      let body = '';
+      req.on('data', data => {
+        body += data;
+      });
+      req.on('end', _ => {
+        console.log('PUT body:', body);
+        users[key] = JSON.parse(body).name;
+        res.end(JSON.stringify(users));
+      });
+    }
   } else if (req.method === 'DELETE') {
-
+    if (req.url.startsWith('/users/')) {
+      const key = req.url.split('/')[2];
+      delete users[key];
+      res.end(JSON.stringify(users));
+    }
   } else {
     res.writeHead(404, 'NOT FOUND!');
     res.end('NOT FOUND!');
